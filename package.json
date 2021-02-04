@@ -3,9 +3,9 @@
   "version": "0.2.2",
   "description": "cacheable mp3 player from files and url for CLI",
   "license": "MIT",
-  "main": "./lib/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "symphogear-g": "./lib/cli.js"
+    "symphogear": "./dist/cli.js"
   },
   "scripts": {
     "start": "tsc -w",
