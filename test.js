@@ -1,2 +1,0 @@
-// @flow
-test.skip('todo', () => {})
