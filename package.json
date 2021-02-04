@@ -1,6 +1,6 @@
 {
   "name": "symphogear-g",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "cacheable mp3 player from files and url for CLI",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -19,7 +19,8 @@
   "homepage": "https://github.com/ivgtr/symphogear-g#readme",
   "bugs": {
     "url": "https://github.com/ivgtr/symphogear-g/issues"
-  },  "scripts": {
+  },
+  "scripts": {
     "start": "tsc -w",
     "prebuild": "rimraf lib",
     "build": "tsc",
