@@ -3,13 +3,15 @@
   "version": "0.2.2",
   "description": "cacheable mp3 player from files and url for CLI",
   "license": "MIT",
-  "bin": "cli.js",
-  "engines": {
-    "node": ">=8"
+  "main": "./lib/index.js",
+  "bin": {
+    "symphogear-g": "./lib/cli.js"
   },
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc"
+    "prebuild": "rimraf lib",
+    "build": "tsc",
+    "prepublishOnl": "yarn build"
   },
   "files": [
     "dist/index.js",
@@ -35,6 +37,7 @@
     "@types/node": "^14.14.25",
     "eslint": "^7.19.0",
     "eslint-config-sumikko": "^0.3.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.1.3"
   }
 }
