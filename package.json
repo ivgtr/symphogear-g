@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf dist",
     "build": "tsc",
     "prepublishOnl": "yarn build"
   },
