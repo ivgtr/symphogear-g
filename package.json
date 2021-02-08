@@ -20,6 +20,12 @@
   "bugs": {
     "url": "https://github.com/ivgtr/symphogear-g/issues"
   },
+  "files": [
+    "readme.md",
+    "package.json",
+    "yarn.lock",
+    "dist"
+  ],
   "scripts": {
     "start": "tsc -w",
     "prebuild": "rimraf dist",
