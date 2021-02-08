@@ -46,9 +46,15 @@ async function fetchFile(file: string) {
     method: 'get',
     url: file,
     responseType: 'stream'
-  }).then(function (response) {
-    response.data.pipe(fs.createWriteStream(filePath))
   })
+    .then(function (response) {
+      response.data.pipe(fs.createWriteStream(filePath))
+    })
+    .catch(() => {
+      if (fs.existsSync(filePath)) {
+        fs.unlink(filePath, () => {})
+      }
+    })
 
   return filePath
 }
