@@ -39,10 +39,10 @@
     "sound"
   ],
   "dependencies": {
-    "axios": "^0.21.1",
     "env-paths": "^2.2.1",
     "execa": "^5.0.0",
     "find-exec": "^1.0.1",
+    "got": "^11.8.2",
     "is-url-superb": "^6.0.0",
     "make-dir": "^3.1.0",
     "meow": "9.0.0",

@@ -1,9 +1,9 @@
-import axios from "axios";
 import crypto from "crypto";
 import envPaths from "env-paths";
 import execa from "execa";
 import findExec from "find-exec";
 import fs from "fs";
+import got from "got";
 import isUrl from "is-url-superb";
 import makeDir from "make-dir";
 import path from "path";
@@ -42,19 +42,9 @@ async function fetchFile(file: string) {
 
   await makeDir(path.dirname(filePath));
 
-  await axios({
-    method: "get",
-    url: file,
-    responseType: "stream",
-  })
-    .then((response) => {
-      response.data.pipe(fs.createWriteStream(filePath));
-    })
-    .catch(() => {
-      if (fs.existsSync(filePath)) {
-        fs.unlink(filePath, () => {});
-      }
-    });
+  const { body } = await got(file, { encoding: undefined });
+
+  fs.writeFileSync(filePath, body);
 
   return filePath;
 }
@@ -64,8 +54,17 @@ const symphogear = async (file: string, opts: { player?: string } = {}) => {
     throw new TypeError(`Expected a string, got ${typeof file}`);
   }
   const player = findPlayer(opts.player);
-  const result = await execa(player, [await fetchFile(file)]);
-  return result;
+  const filePath = await fetchFile(file);
+
+  try {
+    const result = await execa(player, [filePath]);
+    return result;
+  } catch {
+    if (fs.existsSync(filePath)) {
+      fs.unlink(filePath, () => {});
+    }
+    throw new Error("Couldn't play a file.");
+  }
 };
 
 export default symphogear;
