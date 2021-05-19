@@ -7,6 +7,8 @@ import got from "got";
 import isUrl from "is-url-superb";
 import makeDir from "make-dir";
 import path from "path";
+import stream from "stream";
+import { promisify } from "util";
 
 const paths = envPaths("symphogear");
 
@@ -35,16 +37,13 @@ async function fetchFile(file: string) {
   }
 
   const filePath = path.resolve(paths.cache, toHash(file));
-
   if (fs.existsSync(filePath)) {
     return filePath;
   }
 
   await makeDir(path.dirname(filePath));
 
-  const { body } = await got(file, { encoding: undefined });
-
-  fs.writeFileSync(filePath, body);
+  await promisify(stream.pipeline)(got.stream(file), fs.createWriteStream(filePath));
 
   return filePath;
 }
@@ -59,9 +58,10 @@ const symphogear = async (file: string, opts: { player?: string } = {}) => {
   try {
     const result = await execa(player, [filePath]);
     return result;
-  } catch {
+  } catch (e) {
+    console.log(e);
     if (fs.existsSync(filePath)) {
-      fs.unlink(filePath, () => {});
+      // fs.unlink(filePath, () => {});
     }
     throw new Error("Couldn't play a file.");
   }
