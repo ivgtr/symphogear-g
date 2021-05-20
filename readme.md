@@ -6,7 +6,7 @@ cacheable mp3 player from files and url for CLI
 
 ## Differences from the original version.
 
-- support `node:>=14.16`
+- support `node:>=12.17`
 - `JS` -> `TS`
 - Made file writing stream.
 - Deletes the cache when playback fails.
