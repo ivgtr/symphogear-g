@@ -58,10 +58,9 @@ const symphogear = async (file: string, opts: { player?: string } = {}) => {
   try {
     const result = await execa(player, [filePath]);
     return result;
-  } catch (e) {
-    console.log(e);
+  } catch {
     if (fs.existsSync(filePath)) {
-      // fs.unlink(filePath, () => {});
+      fs.unlink(filePath, () => {});
     }
     throw new Error("Couldn't play a file.");
   }
