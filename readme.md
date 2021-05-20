@@ -2,6 +2,8 @@
 
 cacheable mp3 player from files and url for CLI
 
+[![Publish to npm](https://github.com/ivgtr/symphogear-g/actions/workflows/publish.yml/badge.svg)](https://github.com/ivgtr/symphogear-g/actions/workflows/publish.yml)
+
 > 📌✨ Forked: https://github.com/akameco/symphogear
 
 ## Differences from the original version.
